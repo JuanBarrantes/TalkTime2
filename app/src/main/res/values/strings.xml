@@ -3,4 +3,14 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_pantalla_login">PantallaLogin</string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_registro">Registro</string>
+
+    <string name="pie1">Chiclayo - Perú | 2019</string>
+    <string name="pie2">Todos los Derechos Reservados</string>
+
+    <string name="btnRegis">Registrate</string>
+    <string name="btnOlvi">¿Olvidaste tu contraseña?</string>
+
+    <string name="btnInicio">INICIAR</string>
+
 </resources>

@@ -20,7 +20,7 @@
             android:background="#FD5072"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:subtitleTextColor="#3A3939"
-            app:title="Talk Time" />
+            app:title="TalkTime - Iniciar Sesión" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
