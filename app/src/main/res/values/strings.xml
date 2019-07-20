@@ -12,5 +12,7 @@
     <string name="btnOlvi">¿Olvidaste tu contraseña?</string>
 
     <string name="btnInicio">INICIAR</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_registro_2">Registro_2</string>
 
 </resources>
