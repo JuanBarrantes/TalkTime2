@@ -45,7 +45,7 @@ public class Registro extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                click = !click;
+               /* click = !click;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                     Interpolator interpolador = AnimationUtils.loadInterpolator(getBaseContext(),
                             android.R.interpolator.fast_out_slow_in);
@@ -54,7 +54,7 @@ public class Registro extends AppCompatActivity {
                             .rotation(click ? 90f : 0)
                             .setInterpolator(interpolador)
                             .start();
-                }
+                }*/
 
                 onSlideClicked(view);
             }
@@ -72,7 +72,7 @@ public class Registro extends AppCompatActivity {
         transition.setInterpolator(new DecelerateInterpolator());
 
         getWindow().setExitTransition(transition);
-        getWindow().setAllowEnterTransitionOverlap(true);
+        //getWindow().setAllowEnterTransitionOverlap(true);
         Intent siguiente  = new Intent(this, Registro_2.class);
         startActivity(siguiente, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
     }
