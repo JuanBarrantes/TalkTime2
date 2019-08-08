@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registro_2">
+    tools:context=".perfil_1">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -16,11 +16,12 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="TalkTime - Edita Tu Perfil"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_registro_2" />
+    <include layout="@layout/content_perfil_1" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -30,6 +31,17 @@
         android:layout_gravity="bottom|left"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_media_previous"
+        app:backgroundTint="#FB5072"
+        app:fabSize="normal"
+        app:maxImageSize="40sp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_media_next"
         app:backgroundTint="#FB5072"
         app:fabSize="normal"
         app:maxImageSize="40sp" />

@@ -1,6 +1,7 @@
 package com.example.talktime;
 
 import android.annotation.TargetApi;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -23,28 +24,33 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityOptionsCompat;
 
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.transition.Slide;
+import android.transition.Transition;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
-public class Registro_2 extends AppCompatActivity {
+public class perfil_1 extends AppCompatActivity {
 
     private ImageButton tomarFoto;
     private ImageView verfoto;
@@ -54,6 +60,9 @@ public class Registro_2 extends AppCompatActivity {
     private Bitmap bitmap;
     private String KEY_IMAGEN = "foto";
     private String KEY_NOMBRE = "nombre";
+    private EditText etBirthday;
+    Calendar calendario = Calendar.getInstance();
+    private Transition transition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +75,19 @@ public class Registro_2 extends AppCompatActivity {
         getWindow().setEnterTransition(slide);
         //getWindow().setAllowEnterTransitionOverlap(false);
 
-        setContentView(R.layout.activity_registro_2);
+        setContentView(R.layout.activity_perfil_1);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        etBirthday = findViewById(R.id.cumpleaños);
+        etBirthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(perfil_1.this, date, calendario
+                        .get(Calendar.YEAR), calendario.get(Calendar.MONTH),
+                        calendario.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
         tomarFoto = findViewById(R.id.btnCamara);
         verfoto = findViewById(R.id.verFoto);
@@ -92,10 +111,32 @@ public class Registro_2 extends AppCompatActivity {
         });
     }
 
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            calendario.set(Calendar.YEAR, year);
+            calendario.set(Calendar.MONTH, monthOfYear);
+            calendario.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            actualizarInput();
+        }
+    };
+
+    private void actualizarInput() {
+        String formatoDeFecha = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(formatoDeFecha, Locale.US);
+        etBirthday.setText(sdf.format(calendario.getTime()));
+    }
 
 
     public void onBackClicked(View view){
-        finishAfterTransition();
+        transition = new Slide(Gravity.RIGHT);
+        transition.setDuration(Registro.Duracion_transicion);
+        transition.setInterpolator(new DecelerateInterpolator());
+        getWindow().setExitTransition(transition);
+        Intent siguiente  = new Intent(this, inicio.class);
+        startActivity(siguiente, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
     }
 
     private void obtenerImagen(){

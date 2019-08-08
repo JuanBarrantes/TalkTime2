@@ -1,21 +1,20 @@
 package com.example.talktime;
 
-import android.app.ActivityOptions;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.view.Gravity;
-import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
-import android.view.animation.Interpolator;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityOptionsCompat;
@@ -75,24 +74,23 @@ public class Registro extends AppCompatActivity implements Response.Listener<JSO
                         .setAction("Action", null).show();
             }
         });*/
-
-        FloatingActionButton fab = findViewById(R.id.btncontinuar);
-        //fab.setImageResource(R.drawable.ic_agregar);
-
+    Button fab = findViewById(R.id.btncontinuar);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-               /* click = !click;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    Interpolator interpolador = AnimationUtils.loadInterpolator(getBaseContext(),
-                            android.R.interpolator.fast_out_slow_in);
-                    view.animate()
-                            .rotation(click ? 90f : 0)
-                            .setInterpolator(interpolador)
-                            .start();
-                }*/
+            public void onClick(final View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
+                builder.setTitle("¡LISTO!").setIcon(R.drawable.icono);
+                builder.setMessage("Tu cuenta ha sido creada sin problemas");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int witch) {
+                        onSlideClicked(view);
+                    }
+                });
+                final AlertDialog mDialog = builder.create();
+                mDialog.setCanceledOnTouchOutside(false);
+                mDialog.show();
 
-                onSlideClicked(view);
             }
         });
 
@@ -109,7 +107,7 @@ public class Registro extends AppCompatActivity implements Response.Listener<JSO
 
         getWindow().setExitTransition(transition);
         //getWindow().setAllowEnterTransitionOverlap(true);
-        Intent siguiente  = new Intent(this, Registro_2.class);
+        Intent siguiente  = new Intent(this, perfil_1.class);
         startActivity(siguiente, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
     }
 

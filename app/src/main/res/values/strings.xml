@@ -15,5 +15,7 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_registro_2">Registro_2</string>
     <string name="title_activity_comunidad">Comunidad</string>
+    <string name="title_activity_inicio">inicio</string>
+    <string name="title_activity_perfil_2">perfil_2</string>
 
 </resources>
