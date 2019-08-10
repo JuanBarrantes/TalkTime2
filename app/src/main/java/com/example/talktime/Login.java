@@ -68,8 +68,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void Inicio(View view){
-        Intent siguiente  = new Intent(this, inicio.class);
-        startActivity(siguiente);
+
     }
 
 }

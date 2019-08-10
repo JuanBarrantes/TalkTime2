@@ -135,8 +135,7 @@ public class perfil_1 extends AppCompatActivity {
         transition.setDuration(Registro.Duracion_transicion);
         transition.setInterpolator(new DecelerateInterpolator());
         getWindow().setExitTransition(transition);
-        Intent siguiente  = new Intent(this, inicio.class);
-        startActivity(siguiente, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
+
     }
 
     private void obtenerImagen(){
