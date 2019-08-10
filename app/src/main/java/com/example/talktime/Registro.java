@@ -8,6 +8,7 @@ import android.transition.Transition;
 import android.view.Gravity;
 import android.view.animation.DecelerateInterpolator;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
@@ -24,20 +25,25 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Registro extends AppCompatActivity implements Response.Listener<JSONObject>,Response.ErrorListener{
+import java.util.HashMap;
+import java.util.Map;
+
+public class Registro extends AppCompatActivity {
 
     boolean click = false;
     private Transition transition;
     public static final long Duracion_transicion= 1000;
-    RequestQueue rq;
-    JsonRequest jrq;
+
+
     EditText editNombre,editApellido,editCorreo,editUsuario,editClave;
-    Button btnRegistrar;
+    Button btnRegistrar,btnprueba;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +62,9 @@ public class Registro extends AppCompatActivity implements Response.Listener<JSO
        editCorreo=(EditText)findViewById(R.id.txtcorreo);
        editClave=(EditText)findViewById(R.id.txtPass);
        btnRegistrar=(Button)findViewById(R.id.btncontinuar);
+       btnprueba = findViewById(R.id.buttonprueba);
 
         //andres
-
-
-
-
-
-
-
 
        /*FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +94,13 @@ public class Registro extends AppCompatActivity implements Response.Listener<JSO
             }
         });
 
+        btnprueba.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                ejecutarServicio("http://clpe5.com/talk/json/cuentaJson.php");
+            }
+        });
+
     }
     public void onSlideClicked(View view){
         transition = new Slide(Gravity.LEFT);
@@ -114,30 +121,46 @@ public class Registro extends AppCompatActivity implements Response.Listener<JSO
 
 
 
-    //andres
-    @Override
-    public void onErrorResponse(VolleyError error){
-        Toast.makeText(getBaseContext(),"No se encontro el usuario"+error.toString(),Toast.LENGTH_SHORT).show();
-    }
-    @Override
-    public void onResponse(JSONObject response){
-        Cuenta cuenta=new Cuenta();
-        Toast.makeText(getBaseContext(),"Se encontro el usuario"+editUsuario.toString(),Toast.LENGTH_SHORT).show();
-        JSONArray jsonArray=response.optJSONArray("datos");//el json de php es datos.
-        JSONObject jsonObject=null;
-        try {
-            jsonObject =jsonArray.getJSONObject(0);
-            cuenta.setUsuario(jsonObject.optString("usuario"));
 
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
+    private void ejecutarServicio(String URL){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
+                builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
+                builder.setMessage("exitos");
+                builder.setPositiveButton("OK", null);
+                final AlertDialog mDialog = builder.create();
+                mDialog.setCanceledOnTouchOutside(false);
+                mDialog.show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
+                builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
+                builder.setMessage("fallo");
+                builder.setPositiveButton("OK", null);
+                final AlertDialog mDialog = builder.create();
+                mDialog.setCanceledOnTouchOutside(false);
+                mDialog.show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros=new HashMap<String,String>();
+                parametros.put("accion","data");
+                parametros.put("tipo","unico");
+                parametros.put("id","1");
+                return parametros;
+            }
+        };
 
 
-    }
-    private void iniciarSesion(){
-        String url="http://190.0.3.61/talk/modelo/personaModelo.php?accion=dato&user="+editCorreo.getText().toString()+"&pwd="+editClave.getText().toString();
-        jrq=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
-        rq.add(jrq);
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+
+        requestQueue.add(stringRequest);
+
+
     }
 }
