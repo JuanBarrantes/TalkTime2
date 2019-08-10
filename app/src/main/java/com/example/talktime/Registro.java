@@ -42,6 +42,7 @@ public class Registro extends AppCompatActivity {
     private Transition transition;
     public static final long Duracion_transicion= 1000;
     RequestQueue requestQueue;
+    Persona persona;
 
     EditText editNombre,editApellido,editCorreo,editUsuario,editClave;
     Button btnRegistrar,btnprueba;
@@ -75,7 +76,7 @@ public class Registro extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-    Button fab = findViewById(R.id.btncontinuar);
+        Button fab = findViewById(R.id.btncontinuar);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
@@ -98,7 +99,13 @@ public class Registro extends AppCompatActivity {
         btnprueba.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                ejecutarServicio("http://clpe5.com/talk/json/personaJson.php");
+                /* crear registro*/
+               /* ejecutarRegistro("http://clpe5.com/talk/json/personaJson.php");*/
+                /* eliminar registro*/
+                /* ejecutarRegistro("http://clpe5.com/talk/json/personaJson.php");*/
+                persona.setIdpersona(1);
+                /* buscar registro */
+                buscarRegistro("http://clpe5.com/talk/json/personaJson.php?acion=data&id=2");
             }
         });
 
@@ -120,20 +127,15 @@ public class Registro extends AppCompatActivity {
     }
 
 
-
-
-
-    private void ejecutarServicio(String URL){
+    private void crearRegistro(String URL){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
                 builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
-                if (response.toString()=="1"){
+
                     builder.setMessage("Usuario Registrado");
-                }else{
-                    builder.setMessage("Usuario NO Registrado");
-                }
+
 
                 builder.setPositiveButton("OK", null);
                 final AlertDialog mDialog = builder.create();
@@ -183,9 +185,10 @@ public class Registro extends AppCompatActivity {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         jsonObject = response.getJSONObject(i);
+
                         AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
                         builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
-                        builder.setMessage("exitosa");
+                        builder.setMessage("exitosa"+jsonObject.getString("nombre"));
                         builder.setPositiveButton("OK", null);
                         final AlertDialog mDialog = builder.create();
                         mDialog.setCanceledOnTouchOutside(false);
@@ -216,5 +219,93 @@ public class Registro extends AppCompatActivity {
         });
         requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
+    }
+    private void eliminarRegistro(String URL){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
+                builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
+                builder.setMessage("Usuario Eliminado");
+                builder.setPositiveButton("OK", null);
+                final AlertDialog mDialog = builder.create();
+                mDialog.setCanceledOnTouchOutside(false);
+                mDialog.show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
+                builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
+                builder.setMessage("fallo"+error.getMessage());
+                builder.setPositiveButton("OK", null);
+                final AlertDialog mDialog = builder.create();
+                mDialog.setCanceledOnTouchOutside(false);
+                mDialog.show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros=new HashMap<String,String>();
+                parametros.put("accion","delete");
+                parametros.put("ID",persona.getIdpersona().toString());
+                return parametros;
+            }
+        };
+
+
+        requestQueue= Volley.newRequestQueue(this);
+
+        requestQueue.add(stringRequest);
+
+
+    }
+    private void actualizarRegistro(String URL){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
+                builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
+                builder.setMessage("Usuario Actualizado");
+                builder.setPositiveButton("OK", null);
+                final AlertDialog mDialog = builder.create();
+                mDialog.setCanceledOnTouchOutside(false);
+                mDialog.show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
+                builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
+                builder.setMessage("fallo"+error.getMessage());
+                builder.setPositiveButton("OK", null);
+                final AlertDialog mDialog = builder.create();
+                mDialog.setCanceledOnTouchOutside(false);
+                mDialog.show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros=new HashMap<String,String>();
+                parametros.put("accion","update");
+                parametros.put("ID",persona.getIdpersona().toString());
+                parametros.put("nombre",editNombre.getText().toString());
+                parametros.put("apellidos",editApellido.getText().toString());
+                parametros.put("paisActual","unico");
+                parametros.put("lenguaMaterna","unico");
+                parametros.put("lenguaAprendida","unico");
+                parametros.put("ocupacion","unico");
+                parametros.put("fechaNace","unico");
+                parametros.put("sexo","unico");
+                return parametros;
+            }
+        };
+
+
+        requestQueue= Volley.newRequestQueue(this);
+
+        requestQueue.add(stringRequest);
+
+
     }
 }
