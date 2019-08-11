@@ -14,21 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".perfil_2"
-            android:label="@string/title_activity_perfil_2"
+            android:name=".Inicio.inicio"
+            android:label="@string/title_activity_inicio2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".inicio"
-            android:label="@string/title_activity_inicio"
-            android:screenOrientation="portrait"
+            android:name=".Inicio.perfil_2"
+            android:label="@string/title_activity_perfil_2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Comunidad"
+            android:name=".Beans.Comunidad"
             android:label="@string/title_activity_comunidad"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".perfil_1"
+            android:name=".Inicio.perfil_1"
             android:label="@string/title_activity_registro_2"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(final View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
-                builder.setTitle("CARGANDO...").setIcon(R.drawable.icono);
+                builder.setTitle("INICIANDO SESION...").setIcon(R.drawable.icono);
                 builder.setPositiveButton("OK",null);
                 final AlertDialog mDialog = builder.create();
                 mDialog.setCanceledOnTouchOutside(false);
@@ -68,7 +68,8 @@ public class Login extends AppCompatActivity {
     }
 
     private void Inicio(View view){
-
+        Intent siguiente  = new Intent(this, com.example.talktime.Inicio.inicio.class);
+        startActivity(siguiente);
     }
 
 }

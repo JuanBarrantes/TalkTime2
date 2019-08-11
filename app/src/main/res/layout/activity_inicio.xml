@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".inicio">
+    android:fitsSystemWindows="true"
+    tools:context=".Inicio.inicio">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -16,18 +17,21 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:subtitleTextColor="#3A3939"
+            app:title="TalkTime - Inicio" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_inicio" />
+    <include
+        android:id="@+id/include2"
+        layout="@layout/content_inicio" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:layout_anchor="@+id/include2"
+        app:layout_anchorGravity="end|bottom" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

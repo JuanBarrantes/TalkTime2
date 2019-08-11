@@ -1,4 +1,4 @@
-package com.example.talktime;
+package com.example.talktime.Beans;
 
 public class SalaUsuario {
     private Integer idsalaUsuario;

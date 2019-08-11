@@ -1,7 +1,8 @@
-package com.example.talktime;
+package com.example.talktime.Beans;
 
 import android.os.Bundle;
 
+import com.example.talktime.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 

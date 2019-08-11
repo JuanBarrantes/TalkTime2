@@ -1,4 +1,4 @@
-package com.example.talktime;
+package com.example.talktime.Inicio;
 
 import android.os.Bundle;
 
@@ -10,23 +10,18 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 
-public class perfil_2 extends AppCompatActivity {
+import com.example.talktime.R;
+
+public class inicio extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil_2);
+        setContentView(R.layout.activity_inicio);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
     }
 
 }

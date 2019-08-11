@@ -1,4 +1,4 @@
-package com.example.talktime;
+package com.example.talktime.Inicio;
 
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
@@ -19,8 +19,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.talktime.R;
+import com.example.talktime.Registro;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -96,10 +97,15 @@ public class perfil_1 extends AppCompatActivity {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
                 onBackClicked(view);
+            }
+        });
+
+        FloatingActionButton fab3 = findViewById(R.id.fab3);
+        fab3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSlideClicked2(view);
             }
         });
 
@@ -127,6 +133,22 @@ public class perfil_1 extends AppCompatActivity {
         String formatoDeFecha = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(formatoDeFecha, Locale.US);
         etBirthday.setText(sdf.format(calendario.getTime()));
+    }
+
+    public void onSlideClicked2(View view){
+        transition = new Slide(Gravity.LEFT);
+        iniciarActividadSeccundaria2();
+    }
+
+    @SuppressWarnings("unchecked")
+    private void iniciarActividadSeccundaria2(){
+        transition.setDuration(Registro.Duracion_transicion);
+        transition.setInterpolator(new DecelerateInterpolator());
+
+        getWindow().setExitTransition(transition);
+        //getWindow().setAllowEnterTransitionOverlap(true);
+        Intent siguiente  = new Intent(this, perfil_2.class);
+        startActivity(siguiente, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
     }
 
 
