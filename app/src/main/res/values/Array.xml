@@ -243,4 +243,125 @@
         <item>Femenino</item>
         <item>Otro</item>
     </string-array>
+
+    <string-array name="ocupaciones">
+        <item>Abogado</item>
+        <item>Actor</item>
+        <item>Actriz</item>
+        <item>Artista</item>
+        <item>Actuario</item>
+        <item>Administrador</item>
+        <item>Agente de Aduanas</item>
+        <item>Aeromozo/Azafata</item>
+        <item>Corredor Inmobiliario</item>
+        <item>	 Agente de Bolsa 	</item>
+        <item>	 Agente de Inmigración/Migración 	</item>
+        <item>	 Agente de Turismo/Viajes 	</item>
+        <item>	 Agente/Intermediario/Corredor de Seguros 	</item>
+        <item>	 Agricultor, Agrónomo, Agrologo, Arboricultor 	</item>
+        <item>	 albañil, Obrero de Construcción 	</item>
+        <item>	 Ama de Casa 	</item>
+        <item>	 Analista de Sistema y Computación 	</item>
+        <item>	 Antropólogo, Arqueólogo y Etnólogo 	</item>
+        <item>	 Archivero 	</item>
+        <item>	 Armador de Barco 	</item>
+        <item>	 Arquitecto 	</item>
+        <item>	 Artesano 	</item>
+        <item>	 Asistente Social 	</item>
+        <item>	 Escritor</item>
+        <item>	 Avicultor 	</item>
+        <item>	 Bacteriólogo, Farmacólogo, Biólogo, Científico 	</item>
+        <item>	 Basurero/Barrendero 	</item>
+        <item>	 Cajero 	</item>
+        <item>	 Camarero/Barman/Mesero/Chef 	</item>
+        <item>	 Cambista, Compra/Venta de Moneda 	</item>
+        <item>	 Campesino 	</item>
+        <item>	 Capataz 	</item>
+        <item>	 Cargador 	</item>
+        <item>	 Carpintero 	</item>
+        <item>	 Cartero 	</item>
+        <item>	 Cerrajero 	</item>
+        <item>	 Cobrador 	</item>
+        <item>	 Comerciante / Vendedor 	</item>
+        <item>	 Conductor, Chofer / Taxista 	</item>
+        <item>	 Conserje/Portero/Guardián/Vigilante 	</item>
+        <item>	 Constructor 	</item>
+        <item>	 Contador 	</item>
+        <item>	 Contratista 	</item>
+        <item>	 Corte y Confección de Ropa/Fabricante de Prendas 	</item>
+        <item>	 Cosmetólogo, Peluquero y Barbero 	</item>
+        <item>	 Decorador, Dibujante, Publicista 	</item>
+        <item>	 Dentista / Odontólogo 	</item>
+        <item>	 Deportista Profesional, Atleta, Arbitro 	</item>
+        <item>	 Distribuidor 	</item>
+        <item>	 Docente 	</item>
+        <item>	 Economista 	</item>
+        <item>	 Electricista 	</item>
+        <item>	 Empleada(o) del hogar / Nana 	</item>
+        <item>	 Empresario Exportador/Empresario Importador 	</item>
+        <item>	 Enfermero 	</item>
+        <item>	 Ensamblador 	</item>
+        <item>	 Escultor 	</item>
+        <item>	 Estudiante 	</item>
+        <item>	 Fotógrafo/Operadores cámara, cine y tv, locutor 	</item>
+        <item>	 Ganadero 	</item>
+        <item>	 Gasfitero 	</item>
+        <item>	 Historiador 	</item>
+        <item>	 Ingeniero 	</item>
+        <item>	 Interprete, Traductor 	</item>
+        <item>	 Jardinero 	</item>
+        <item>	 Jockey 	</item>
+        <item>	 Joyero y/o Platero / Orfebre 	</item>
+        <item>	 Jubilado / Pensionista 	</item>
+        <item>	 Laboratorista (Técnico) 	</item>
+        <item>	 Liquidador, Reclamaciones/Seguros 	</item>
+        <item>	 Maquinista / Operador de maquinaria 	</item>
+        <item>	 Martillero / Subastador 	</item>
+        <item>	 Mayorista, comercio al por mayor 	</item>
+        <item>	 Mecánico 	</item>
+        <item>	 Medico / Cirujano 	</item>
+        <item>	 Metalurgista 	</item>
+        <item>	 Miembro de las Fuerzas Armadas 	</item>
+        <item>	 Nutricionista 	</item>
+        <item>	 Obrero / Operador 	</item>
+        <item>	 Obstetriz 	</item>
+        <item>	 Organizador de Eventos 	</item>
+        <item>	 Panadero / Pastelero 	</item>
+        <item>	 Paramédico 	</item>
+        <item>	 Periodista 	</item>
+        <item>	 Perito 	</item>
+        <item>	 Pescador 	</item>
+        <item>	 Piloto 	</item>
+        <item>	 Pintor 	</item>
+        <item>	 Policía Municipal 	</item>
+        <item>	 Policía PNP 	</item>
+        <item>	 Productor de Cine / Radio / Televisión / Teatro 	</item>
+        <item>	 Productor, Cultivos Extensivos 	</item>
+        <item>	 Programador 	</item>
+        <item>	 Psicólogo / Terapeuta 	</item>
+        <item>	 Quiropráctico/Kinesiterapeuta (Kinesiólogos) 	</item>
+        <item>	 Relacionista Publico e Industrial 	</item>
+        <item>	 Relojero 	</item>
+        <item>	 Reparación de Automóviles, Pintor Retocador 	</item>
+        <item>	 Reparador de Aparatos Electrodomésticos 	</item>
+        <item>	 Repartidor 	</item>
+        <item>	 Sacerdote/Monja 	</item>
+        <item>	 Secretaria, Recepcionista, Telefonista 	</item>
+        <item>	 Seguridad/Guardaespaldas/Guardia de Seguridad 	</item>
+        <item>	 Servicio de Almacenamiento/Almacenero 	</item>
+        <item>	 Servicio de Alquiler de Vehículos 	</item>
+        <item>	 Servicios de Alquiler de Videos, Equipos de Sonido 	</item>
+        <item>	 Sociólogo 	</item>
+        <item>	 Tasador 	</item>
+        <item>	 Técnico 	</item>
+        <item>	 Torero 	</item>
+        <item>	 Tramitador 	</item>
+        <item>	 Transporte de Carga y/o Mudanza 	</item>
+        <item>	 Transportista 	</item>
+        <item>	 Vendedor Ambulante 	</item>
+        <item>	 Veterinario, Zoólogo, Zootécnico 	</item>
+        <item>	 Visitador Medico 	</item>
+        <item>	 Zapatero 	</item>
+        <item>	 Otros 	</item>
+    </string-array>
 </resources>

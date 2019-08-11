@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".inicio"
+    tools:context=".Inicio.inicio"
     tools:showIn="@layout/activity_inicio">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
