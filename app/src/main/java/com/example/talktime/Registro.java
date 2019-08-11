@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.transition.Slide;
 import android.transition.Transition;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.animation.DecelerateInterpolator;
 
@@ -23,6 +24,7 @@ import androidx.core.app.ActivityOptionsCompat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -42,7 +44,7 @@ public class Registro extends AppCompatActivity {
     private Transition transition;
     public static final long Duracion_transicion= 1000;
     RequestQueue requestQueue;
-
+    TextView editInvi;
     EditText editNombre,editApellido,editCorreo,editUsuario,editClave,editClave2;
     Button btnRegistrar,btnprueba;
 
@@ -54,11 +56,12 @@ public class Registro extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //andres
-       editNombre=(EditText)findViewById(R.id.txtnombre);
+        editInvi=findViewById(R.id.txtidhidden);
+       editNombre=findViewById(R.id.txtnombre);
        editApellido=(EditText)findViewById(R.id.txtapellido);
-       editUsuario=(EditText)findViewById(R.id.txtUsuario);
+       editUsuario=(EditText)findViewById(R.id.txtuser);
        editCorreo=(EditText)findViewById(R.id.txtcorreo);
-       editClave=(EditText)findViewById(R.id.txtPass);
+       editClave=(EditText)findViewById(R.id.txtpass);
         editClave2=(EditText)findViewById(R.id.txtpass2);
        btnRegistrar=(Button)findViewById(R.id.btncontinuar);
        btnprueba = findViewById(R.id.buttonprueba);
@@ -102,13 +105,9 @@ public class Registro extends AppCompatActivity {
                     @Override
                     public void onSuccess(String result) {
                       /*   persona.setIdpersona(Integer.parseInt(result));*/
-                        AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
-                        builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
-                        builder.setMessage("exitosa"+result);
-                        builder.setPositiveButton("OK", null);
-                        final AlertDialog mDialog = builder.create();
-                        mDialog.setCanceledOnTouchOutside(false);
-                        mDialog.show();
+                        editInvi.setText(result);
+                        Log.i("MyActivity", "onClick: "+result.toString());
+                        crearCuenta("http://clpe5.com/talk/json/cuentaJson.php");
                     }
                 });
                 /* eliminar registro*/
@@ -321,7 +320,6 @@ public class Registro extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
                 builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
                 builder.setMessage("Usuario Registrado"+response.toString());
-
                 builder.setPositiveButton("OK", null);
                 final AlertDialog mDialog = builder.create();
                 mDialog.setCanceledOnTouchOutside(false);
@@ -347,7 +345,7 @@ public class Registro extends AppCompatActivity {
                 parametros.put("clave",editClave.getText().toString());
                 parametros.put("email",editCorreo.getText().toString());
                 parametros.put("foto","");
-                parametros.put("IDpersona","1");
+                parametros.put("IDpersona",editInvi.getText().toString());
                 return parametros;
             }
         };
