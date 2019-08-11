@@ -42,27 +42,24 @@ public class Registro extends AppCompatActivity {
     private Transition transition;
     public static final long Duracion_transicion= 1000;
     RequestQueue requestQueue;
-    Persona persona;
 
-    EditText editNombre,editApellido,editCorreo,editUsuario,editClave;
+    EditText editNombre,editApellido,editCorreo,editUsuario,editClave,editClave2;
     Button btnRegistrar,btnprueba;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         //andres
-
        editNombre=(EditText)findViewById(R.id.txtnombre);
        editApellido=(EditText)findViewById(R.id.txtapellido);
        editUsuario=(EditText)findViewById(R.id.txtUsuario);
        editCorreo=(EditText)findViewById(R.id.txtcorreo);
        editClave=(EditText)findViewById(R.id.txtPass);
+        editClave2=(EditText)findViewById(R.id.txtpass2);
        btnRegistrar=(Button)findViewById(R.id.btncontinuar);
        btnprueba = findViewById(R.id.buttonprueba);
 
@@ -99,13 +96,26 @@ public class Registro extends AppCompatActivity {
         btnprueba.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
                 /* crear registro*/
-               /* ejecutarRegistro("http://clpe5.com/talk/json/personaJson.php");*/
+                crearRegistro(new VolleyCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                      /*   persona.setIdpersona(Integer.parseInt(result));*/
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
+                        builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
+                        builder.setMessage("exitosa"+result);
+                        builder.setPositiveButton("OK", null);
+                        final AlertDialog mDialog = builder.create();
+                        mDialog.setCanceledOnTouchOutside(false);
+                        mDialog.show();
+                    }
+                });
                 /* eliminar registro*/
                 /* ejecutarRegistro("http://clpe5.com/talk/json/personaJson.php");*/
-                persona.setIdpersona(1);
+             /*   persona.setIdpersona(1);*/
                 /* buscar registro */
-                buscarRegistro("http://clpe5.com/talk/json/personaJson.php?acion=data&id=2");
+              /*  buscarRegistro("http://clpe5.com/talk/json/personaJson.php?acion=data&id=2");*/
             }
         });
 
@@ -127,20 +137,16 @@ public class Registro extends AppCompatActivity {
     }
 
 
-    private void crearRegistro(String URL){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+    private void crearRegistro(final VolleyCallback callback){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://clpe5.com/talk/json/personaJson.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
-                builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
+                /* persona.setIdpersona(Integer.parseInt(response.toString()));
+                crearRegistro("http://clpe5.com/talk/json/cuentaJson.php");*/
 
-                    builder.setMessage("Usuario Registrado");
+                callback.onSuccess(response);
 
 
-                builder.setPositiveButton("OK", null);
-                final AlertDialog mDialog = builder.create();
-                mDialog.setCanceledOnTouchOutside(false);
-                mDialog.show();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -160,19 +166,17 @@ public class Registro extends AppCompatActivity {
                 parametros.put("accion","save");
                 parametros.put("nombre",editNombre.getText().toString());
                 parametros.put("apellidos",editApellido.getText().toString());
-                parametros.put("paisActual","unico");
-                parametros.put("lenguaMaterna","unico");
-                parametros.put("lenguaAprendida","unico");
-                parametros.put("ocupacion","unico");
-                parametros.put("fechaNace","unico");
-                parametros.put("sexo","unico");
+                parametros.put("paisActual","");
+                parametros.put("lenguaMaterna","");
+                parametros.put("lenguaAprendida","");
+                parametros.put("ocupacion","");
+                parametros.put("fechaNace","");
+                parametros.put("sexo","");
                 return parametros;
             }
         };
 
-
          requestQueue= Volley.newRequestQueue(this);
-
         requestQueue.add(stringRequest);
 
 
@@ -248,7 +252,7 @@ public class Registro extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> parametros=new HashMap<String,String>();
                 parametros.put("accion","delete");
-                parametros.put("ID",persona.getIdpersona().toString());
+                parametros.put("ID","1");
                 return parametros;
             }
         };
@@ -288,7 +292,7 @@ public class Registro extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> parametros=new HashMap<String,String>();
                 parametros.put("accion","update");
-                parametros.put("ID",persona.getIdpersona().toString());
+                parametros.put("ID","1");
                 parametros.put("nombre",editNombre.getText().toString());
                 parametros.put("apellidos",editApellido.getText().toString());
                 parametros.put("paisActual","unico");
@@ -308,4 +312,55 @@ public class Registro extends AppCompatActivity {
 
 
     }
+
+
+    private void crearCuenta(String URL){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
+                builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
+                builder.setMessage("Usuario Registrado"+response.toString());
+
+                builder.setPositiveButton("OK", null);
+                final AlertDialog mDialog = builder.create();
+                mDialog.setCanceledOnTouchOutside(false);
+                mDialog.show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
+                builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
+                builder.setMessage("fallo"+error.getMessage());
+                builder.setPositiveButton("OK", null);
+                final AlertDialog mDialog = builder.create();
+                mDialog.setCanceledOnTouchOutside(false);
+                mDialog.show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros=new HashMap<String,String>();
+                parametros.put("accion","save");
+                parametros.put("usuario",editUsuario.getText().toString());
+                parametros.put("clave",editClave.getText().toString());
+                parametros.put("email",editCorreo.getText().toString());
+                parametros.put("foto","");
+                parametros.put("IDpersona","1");
+                return parametros;
+            }
+        };
+
+
+        requestQueue= Volley.newRequestQueue(this);
+
+        requestQueue.add(stringRequest);
+
+
+    }
+    public interface VolleyCallback{
+        void onSuccess(String result);
+    }
+
 }
