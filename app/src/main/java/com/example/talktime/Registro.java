@@ -115,7 +115,7 @@ public class Registro extends AppCompatActivity {
 
         getWindow().setExitTransition(transition);
         //getWindow().setAllowEnterTransitionOverlap(true);
-        Intent siguiente  = new Intent(this, perfil_1.class);
+        Intent siguiente  = new Intent(this, com.example.talktime.Inicio.perfil_1.class);
         startActivity(siguiente, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
     }
 
