@@ -14,9 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Inicio.inicio"
-            android:label="@string/title_activity_inicio2"
+            android:name=".Chat.FireBase.Activity.Registro_Fire_Base"
+            android:label="@string/title_activity_registro__fire__base"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Chat.FireBase.Activity.Login_FireBase"
+            android:label="@string/title_activity_login__fire_base"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Chat.FireBase.Activity.chats"
+            android:label="@string/title_activity_chats"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Chat.FireBase.Activity.amigos"
+            android:label="@string/title_activity_amigos"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Chat.FireBase.Activity.inicio"
+            android:label="@string/title_activity_inicio2"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Inicio.perfil_2"
             android:label="@string/title_activity_perfil_2"

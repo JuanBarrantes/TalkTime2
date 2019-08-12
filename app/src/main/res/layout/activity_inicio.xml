@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Inicio.inicio">
+    tools:context=".Chat.FireBase.Activity.inicio">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -28,10 +28,36 @@
         layout="@layout/content_inicio" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnPerfill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_anchor="@+id/include2"
-        app:layout_anchorGravity="end|bottom" />
+        android:layout_gravity="bottom|left"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="#FB5072"
+        app:fabSize="normal"
+        app:maxImageSize="40sp"
+        app:srcCompat="@drawable/account" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnpBiografia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/library"
+        app:backgroundTint="#FB5072"
+        app:fabSize="normal"
+        app:maxImageSize="40sp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnVerUsuarios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/chat"
+        app:backgroundTint="#FB5072"
+        app:fabSize="normal"
+        app:maxImageSize="40sp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

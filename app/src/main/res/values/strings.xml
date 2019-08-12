@@ -33,5 +33,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_amigos">amigos</string>
+    <string name="title_activity_chats">chats</string>
+    <string name="title_activity_login__fire_base">Login_FireBase</string>
+    <string name="title_activity_registro__fire__base">Registro_Fire_Base</string>
 
 </resources>

@@ -7,7 +7,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,9 +17,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.talktime.Chat.FireBase.Activity.Login_FireBase;
+import com.example.talktime.Chat.FireBase.Activity.inicio;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Login extends AppCompatActivity {
@@ -34,7 +34,14 @@ public class Login extends AppCompatActivity {
         setSupportActionBar(toolbar);
         LoginCorreo=findViewById(R.id.txtUsuario);
         LoginClave=findViewById(R.id.txtPass);
-
+        ///////FIREBASE
+        Button btnLoginFb = findViewById(R.id.btnFireBase);
+        btnLoginFb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginFB(view);
+            }
+        });
 
 
         Button btnLogin = findViewById(R.id.BtnIninciar);
@@ -98,9 +105,14 @@ public class Login extends AppCompatActivity {
         startActivity(siguiente);
     }
 
+    private void LoginFB(View view){
+        Intent siguiente  = new Intent(this, Login_FireBase.class);
+        startActivity(siguiente);
+    }
+
     private void Inicio(View view)
     {
-        Intent siguiente  = new Intent(this, com.example.talktime.Inicio.inicio.class);
+        Intent siguiente  = new Intent(this, inicio.class);
         startActivity(siguiente);
     }
     private void logear(String URL){
