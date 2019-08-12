@@ -127,7 +127,7 @@ public class perfil_2 extends AppCompatActivity {
     }
 
     private void Inicio(View view){
-        Intent siguiente  = new Intent(this, inicio.class);
+        Intent siguiente  = new Intent(this, com.example.talktime.Chat.FireBase.Activity.inicio.class);
         startActivity(siguiente);
     }
     private void crearDetalleUsuario(String URL,final View view){

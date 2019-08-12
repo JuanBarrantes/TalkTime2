@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "982110020163",
+    "firebase_url": "https://chattalktime-645cb.firebaseio.com",
+    "project_id": "chattalktime-645cb",
+    "storage_bucket": "chattalktime-645cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982110020163:android:aa53d1544e440611",
+        "android_client_info": {
+          "package_name": "com.example.talktime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "982110020163-3fcc9016iktm3a0snrqq1bfj42nvcair.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBflXDKhLTmg4tVC2dWAmwgsc83F3yiavk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "982110020163-3fcc9016iktm3a0snrqq1bfj42nvcair.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
