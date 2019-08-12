@@ -82,7 +82,18 @@ public class Registro extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                if (editClave.getText().toString().equals(editClave2.getText().toString())){
+                if (editNombre.getText().toString().equals("") && editApellido.getText().toString().equals("")
+                        && editUsuario.getText().toString().equals("")&& editClave.getText().toString().equals("")
+                        && editClave2.getText().toString().equals("")&& editCorreo.getText().toString().equals("")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
+                    builder.setTitle("DATO VACIO!").setIcon(R.drawable.icono);
+                    builder.setMessage("tienes que llenar todos los caampos");
+                    builder.setPositiveButton("OK", null);
+                    final AlertDialog mDialog = builder.create();
+                    mDialog.setCanceledOnTouchOutside(false);
+                    mDialog.show();
+                }else{
+                    if (editClave.getText().toString().equals(editClave2.getText().toString())){
                     /* crear registro
                     crearRegistro(new VolleyCallback() {
                         @Override
@@ -93,16 +104,19 @@ public class Registro extends AppCompatActivity {
                         }
                     });
                      crear registro*/
-                    onSlideClicked(view);
-                }else{
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
-                    builder.setTitle("No Puedes Ingresar").setIcon(R.drawable.icono);
-                    builder.setMessage("Las contraseñas no concuerdan ");
-                    builder.setPositiveButton("OK", null);
-                    final AlertDialog mDialog = builder.create();
-                    mDialog.setCanceledOnTouchOutside(false);
-                    mDialog.show();
+
+                        onSlideClicked(view);
+                    }else{
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
+                        builder.setTitle("No Puedes Ingresar").setIcon(R.drawable.icono);
+                        builder.setMessage("Las contraseñas no concuerdan ");
+                        builder.setPositiveButton("OK", null);
+                        final AlertDialog mDialog = builder.create();
+                        mDialog.setCanceledOnTouchOutside(false);
+                        mDialog.show();
+                    }
                 }
+
 
 
             }

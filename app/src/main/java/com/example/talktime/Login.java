@@ -67,7 +67,18 @@ public class Login extends AppCompatActivity {
                     }
                 }, 700);*/
                 Log.i("MyActivity", "onClick: "+LoginCorreo.getText().toString());
-                logear("http://clpe5.com/talk/json/cuentaJson.php?acion=data&email="+LoginCorreo.getText().toString()+"&clave="+LoginClave.getText().toString());
+                if (LoginCorreo.getText().toString().equals("") && LoginCorreo.getText().toString().equals("")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+                    builder.setTitle("DATO VACIO!").setIcon(R.drawable.icono);
+                    builder.setMessage("tienes que ingresar email y contraseña");
+                    builder.setPositiveButton("OK", null);
+                    final AlertDialog mDialog = builder.create();
+                    mDialog.setCanceledOnTouchOutside(false);
+                    mDialog.show();
+                }else{
+                    logear("http://clpe5.com/talk/json/cuentaJson.php?acion=data&email="+LoginCorreo.getText().toString()+"&clave="+LoginClave.getText().toString());
+                }
+
 
             }
         });

@@ -135,7 +135,20 @@ public class perfil_1 extends AppCompatActivity {
                 Log.i("MyActivity", "onClick: "+spSexo.getSelectedItem().toString());
                 Log.i("MyActivity", "onClick: "+etBirthday.getText().toString());
                 //actualizarRegistro("http://clpe5.com/talk/json/personaJson.php", view);
-                onSlideClicked2(view);
+                if (spPaises.getSelectedItem().toString().equals("") && etBirthday.getText().toString().equals("")
+                &&spSexo.getSelectedItem().toString().equals("") &&spOcupacion.getSelectedItem().toString().equals("") &&
+                        idioMaterno.getText().toString().equals("")&& idioInteres.getText().toString().equals("") ){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(perfil_1.this);
+                    builder.setTitle("DATO VACIO!").setIcon(R.drawable.icono);
+                    builder.setMessage("tienes que llenar todos los campos");
+                    builder.setPositiveButton("OK", null);
+                    final AlertDialog mDialog = builder.create();
+                    mDialog.setCanceledOnTouchOutside(false);
+                    mDialog.show();
+                }else {
+                    onSlideClicked2(view);
+                }
+
             }
         });
 
