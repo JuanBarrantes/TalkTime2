@@ -84,8 +84,8 @@ public class perfil_2 extends AppCompatActivity {
         btnGuardarPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                if ( editDescp1.getText().toString().equals("") && editDescp2.getText().toString().equals("")
-                && editDescp3.getText().toString().equals("") ){
+                if ( editDescp1.getText().toString().equals("") || editDescp2.getText().toString().equals("")
+                        || editDescp3.getText().toString().equals("") ){
                     AlertDialog.Builder builder = new AlertDialog.Builder(perfil_2.this);
                     builder.setTitle("DATO VACIO!").setIcon(R.drawable.icono);
                     builder.setMessage("tienes que llenar todos los campos");

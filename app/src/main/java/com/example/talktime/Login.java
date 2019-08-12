@@ -67,7 +67,7 @@ public class Login extends AppCompatActivity {
                     }
                 }, 700);*/
                 Log.i("MyActivity", "onClick: "+LoginCorreo.getText().toString());
-                if (LoginCorreo.getText().toString().equals("") && LoginCorreo.getText().toString().equals("")){
+                if (LoginClave.getText().toString().equals("") || LoginCorreo.getText().toString().equals("")){
                     AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
                     builder.setTitle("DATO VACIO!").setIcon(R.drawable.icono);
                     builder.setMessage("tienes que ingresar email y contraseña");

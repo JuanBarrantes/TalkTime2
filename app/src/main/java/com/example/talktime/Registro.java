@@ -82,12 +82,12 @@ public class Registro extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                if (editNombre.getText().toString().equals("") && editApellido.getText().toString().equals("")
-                        && editUsuario.getText().toString().equals("")&& editClave.getText().toString().equals("")
-                        && editClave2.getText().toString().equals("")&& editCorreo.getText().toString().equals("")){
+                if (editNombre.getText().toString().equals("") || editApellido.getText().toString().equals("")
+                        || editUsuario.getText().toString().equals("")|| editClave.getText().toString().equals("")
+                        || editClave2.getText().toString().equals("")|| editCorreo.getText().toString().equals("")){
                     AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
                     builder.setTitle("DATO VACIO!").setIcon(R.drawable.icono);
-                    builder.setMessage("tienes que llenar todos los caampos");
+                    builder.setMessage("tienes que llenar todos los campos");
                     builder.setPositiveButton("OK", null);
                     final AlertDialog mDialog = builder.create();
                     mDialog.setCanceledOnTouchOutside(false);
