@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -19,10 +20,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.talktime.Beans.Persona;
 import com.example.talktime.R;
 import com.example.talktime.Registro;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityOptionsCompat;
@@ -32,13 +35,15 @@ import android.provider.MediaStore;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
@@ -46,12 +51,15 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 public class perfil_1 extends AppCompatActivity {
+    private Spinner spPaises,spSexo,spOcupacion;
+    RequestQueue requestQueue;
 
     private ImageButton tomarFoto;
     private ImageView verfoto;
@@ -61,9 +69,11 @@ public class perfil_1 extends AppCompatActivity {
     private Bitmap bitmap;
     private String KEY_IMAGEN = "foto";
     private String KEY_NOMBRE = "nombre";
-    private EditText etBirthday;
+    private EditText etBirthday,idioMaterno,idioInteres;
     Calendar calendario = Calendar.getInstance();
     private Transition transition;
+    private String recuperamos_variable,recuperamos_IDcuenta,recuperamos_nombre,recuperamos_apellido,recuperamos_usuario,recuperamos_clave,recuperamos_correo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +89,22 @@ public class perfil_1 extends AppCompatActivity {
         setContentView(R.layout.activity_perfil_1);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //andres
+        spPaises=findViewById(R.id.spinner_paises);
+        spSexo=findViewById(R.id.spinner2_sexo);
+        spOcupacion=findViewById(R.id.spinner_ocupaciones);
+        idioMaterno=findViewById(R.id.editText2);
+        idioInteres=findViewById(R.id.editText3);
+
+        //estoy traendo los datos del activiy registro
+
+        //recuperamos_variable = datos.getString("vaIDpersona");
+        //recuperamos_IDcuenta=datos.getString("vaIDcuenta");
+        //Log.i("MyActivity", "actividad : "+recuperamos_variable);
+        //Log.i("MyActivity", "actividadIDcuneta : "+recuperamos_IDcuenta);
+
+        //andres  finish
 
         etBirthday = findViewById(R.id.cumpleaños);
         etBirthday.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +131,10 @@ public class perfil_1 extends AppCompatActivity {
         fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i("MyActivity", "onClick: "+spPaises.getSelectedItem().toString());
+                Log.i("MyActivity", "onClick: "+spSexo.getSelectedItem().toString());
+                Log.i("MyActivity", "onClick: "+etBirthday.getText().toString());
+                //actualizarRegistro("http://clpe5.com/talk/json/personaJson.php", view);
                 onSlideClicked2(view);
             }
         });
@@ -126,6 +156,7 @@ public class perfil_1 extends AppCompatActivity {
             calendario.set(Calendar.MONTH, monthOfYear);
             calendario.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             actualizarInput();
+
         }
     };
 
@@ -147,7 +178,21 @@ public class perfil_1 extends AppCompatActivity {
 
         getWindow().setExitTransition(transition);
         //getWindow().setAllowEnterTransitionOverlap(true);
+
         Intent siguiente  = new Intent(this, perfil_2.class);
+        //siguiente.putExtra("vaIDcuenta", recuperamos_IDcuenta);
+        Bundle datos = this.getIntent().getExtras();
+        siguiente.putExtra("vaUsuario", datos.getString("vaUsuario"));
+        siguiente.putExtra("vaClave",datos.getString("vaClave"));
+        siguiente.putExtra("vaEmail",datos.getString("vaEmail"));
+        siguiente.putExtra("vaNombre", datos.getString("vaNombre"));
+        siguiente.putExtra("vaApellido",datos.getString("vaApellido"));
+        siguiente.putExtra("vaPais",spPaises.getSelectedItem().toString());
+        siguiente.putExtra("vaSexo",spSexo.getSelectedItem().toString());
+        siguiente.putExtra("vaFecha",etBirthday.getText().toString());
+        siguiente.putExtra("vaIdioMaterno",idioMaterno.getText().toString());
+        siguiente.putExtra("vaIdioInteres",idioInteres.getText().toString());
+        siguiente.putExtra("vaOcupacion",spOcupacion.getSelectedItem().toString());
         startActivity(siguiente, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
     }
 
@@ -262,5 +307,55 @@ public class perfil_1 extends AppCompatActivity {
             }
         }
     }
+    private void actualizarRegistro(String URL,final View view){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(perfil_1.this);
+                builder.setTitle("¡LISTO!").setIcon(R.drawable.icono);
+                builder.setMessage("Usuario Actualizado");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int witch) {
+                        onSlideClicked2(view);
+                    }
+                });
+                final AlertDialog mDialog = builder.create();
+                mDialog.setCanceledOnTouchOutside(false);
+                mDialog.show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(perfil_1.this);
+                builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
+                builder.setMessage("fallo"+error.getMessage());
+                builder.setPositiveButton("OK", null);
+                final AlertDialog mDialog = builder.create();
+                mDialog.setCanceledOnTouchOutside(false);
+                mDialog.show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros=new HashMap<String,String>();
+                parametros.put("accion","update");
+                parametros.put("ID",recuperamos_variable);
+                parametros.put("lenguaMaterna",idioMaterno.getText().toString());
+                parametros.put("lenguaAprendida",idioInteres.getText().toString());
+                parametros.put("paisActual",spPaises.getSelectedItem().toString());
+                parametros.put("fechaNace",etBirthday.getText().toString());
+                parametros.put("sexo",spSexo.getSelectedItem().toString());
+                parametros.put("ocupacion",spOcupacion.getSelectedItem().toString());
+                return parametros;
+            }
+        };
 
+
+        requestQueue= Volley.newRequestQueue(this);
+
+        requestQueue.add(stringRequest);
+
+
+    }
 }

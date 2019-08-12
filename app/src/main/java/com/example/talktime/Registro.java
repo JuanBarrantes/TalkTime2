@@ -1,5 +1,6 @@
 package com.example.talktime;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,7 +47,8 @@ public class Registro extends AppCompatActivity {
     RequestQueue requestQueue;
     TextView editInvi;
     EditText editNombre,editApellido,editCorreo,editUsuario,editClave,editClave2;
-    Button btnRegistrar,btnprueba;
+    Button btnRegistrar;
+    String IDcuenta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,7 @@ public class Registro extends AppCompatActivity {
        editClave=(EditText)findViewById(R.id.txtpass);
         editClave2=(EditText)findViewById(R.id.txtpass2);
        btnRegistrar=(Button)findViewById(R.id.btncontinuar);
-       btnprueba = findViewById(R.id.buttonprueba);
+
 
         //andres
 
@@ -80,43 +82,38 @@ public class Registro extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
-                builder.setTitle("¡LISTO!").setIcon(R.drawable.icono);
-                builder.setMessage("Tu cuenta ha sido creada sin problemas");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int witch) {
-                        onSlideClicked(view);
-                    }
-                });
-                final AlertDialog mDialog = builder.create();
-                mDialog.setCanceledOnTouchOutside(false);
-                mDialog.show();
+                if (editClave.getText().toString().equals(editClave2.getText().toString())){
+                    /* crear registro
+                    crearRegistro(new VolleyCallback() {
+                        @Override
+                        public void onSuccess(String result) {
+                            editInvi.setText(result);
+                            Log.i("MyActivity", "onClick: "+result.toString());
+                            crearCuenta("http://clpe5.com/talk/json/cuentaJson.php",view);
+                        }
+                    });
+                     crear registro*/
+                    onSlideClicked(view);
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
+                    builder.setTitle("No Puedes Ingresar").setIcon(R.drawable.icono);
+                    builder.setMessage("Las contraseñas no concuerdan ");
+                    builder.setPositiveButton("OK", null);
+                    final AlertDialog mDialog = builder.create();
+                    mDialog.setCanceledOnTouchOutside(false);
+                    mDialog.show();
+                }
+
 
             }
         });
 
-        btnprueba.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
+        /* eliminar registro*/
+        /* ejecutarRegistro("http://clpe5.com/talk/json/personaJson.php");*/
+        /*   persona.setIdpersona(1);*/
+        /* buscar registro */
+        /*  buscarRegistro("http://clpe5.com/talk/json/personaJson.php?acion=data&id=2");*/
 
-                /* crear registro*/
-                crearRegistro(new VolleyCallback() {
-                    @Override
-                    public void onSuccess(String result) {
-                      /*   persona.setIdpersona(Integer.parseInt(result));*/
-                        editInvi.setText(result);
-                        Log.i("MyActivity", "onClick: "+result.toString());
-                        crearCuenta("http://clpe5.com/talk/json/cuentaJson.php");
-                    }
-                });
-                /* eliminar registro*/
-                /* ejecutarRegistro("http://clpe5.com/talk/json/personaJson.php");*/
-             /*   persona.setIdpersona(1);*/
-                /* buscar registro */
-              /*  buscarRegistro("http://clpe5.com/talk/json/personaJson.php?acion=data&id=2");*/
-            }
-        });
 
     }
     public void onSlideClicked(View view){
@@ -132,11 +129,19 @@ public class Registro extends AppCompatActivity {
         getWindow().setExitTransition(transition);
         //getWindow().setAllowEnterTransitionOverlap(true);
         Intent siguiente  = new Intent(this, com.example.talktime.Inicio.perfil_1.class);
+        siguiente.putExtra("vaUsuario", editUsuario.getText().toString());
+        siguiente.putExtra("vaClave", editClave.getText().toString());
+        siguiente.putExtra("vaEmail", editCorreo.getText().toString());
+        siguiente.putExtra("vaNombre", editNombre.getText().toString());
+        siguiente.putExtra("vaApellido", editApellido.getText().toString());
+        //siguiente.putExtra("vaIDpersona", editInvi.getText().toString());
+        //siguiente.putExtra("vaIDcuenta", IDcuenta);
         startActivity(siguiente, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
     }
 
 
     private void crearRegistro(final VolleyCallback callback){
+        final ProgressDialog loading = ProgressDialog.show(this,"Subiendo...","Espere por favor...",false,false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://clpe5.com/talk/json/personaJson.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -152,7 +157,7 @@ public class Registro extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
                 builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
-                builder.setMessage("fallo"+error.getMessage());
+                builder.setMessage("Falló la conexión "+error.getMessage());
                 builder.setPositiveButton("OK", null);
                 final AlertDialog mDialog = builder.create();
                 mDialog.setCanceledOnTouchOutside(false);
@@ -294,12 +299,12 @@ public class Registro extends AppCompatActivity {
                 parametros.put("ID","1");
                 parametros.put("nombre",editNombre.getText().toString());
                 parametros.put("apellidos",editApellido.getText().toString());
-                parametros.put("paisActual","unico");
-                parametros.put("lenguaMaterna","unico");
-                parametros.put("lenguaAprendida","unico");
-                parametros.put("ocupacion","unico");
-                parametros.put("fechaNace","unico");
-                parametros.put("sexo","unico");
+                parametros.put("paisActual","");
+                parametros.put("lenguaMaterna","");
+                parametros.put("lenguaAprendida","");
+                parametros.put("ocupacion","");
+                parametros.put("fechaNace","");
+                parametros.put("sexo","");
                 return parametros;
             }
         };
@@ -313,14 +318,21 @@ public class Registro extends AppCompatActivity {
     }
 
 
-    private void crearCuenta(String URL){
+    private void crearCuenta(String URL,final View view){
+        final ProgressDialog loading = ProgressDialog.show(this,"Subiendo...","Espere por favor...",false,false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                IDcuenta=response.toString();
                 AlertDialog.Builder builder = new AlertDialog.Builder(Registro.this);
-                builder.setTitle("Respuesta de BD").setIcon(R.drawable.icono);
-                builder.setMessage("Usuario Registrado"+response.toString());
-                builder.setPositiveButton("OK", null);
+                builder.setTitle("¡LISTO!").setIcon(R.drawable.icono);
+                builder.setMessage("Tu cuenta ha sido creada sin problemas");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int witch) {
+                        onSlideClicked(view);
+                    }
+                });
                 final AlertDialog mDialog = builder.create();
                 mDialog.setCanceledOnTouchOutside(false);
                 mDialog.show();
